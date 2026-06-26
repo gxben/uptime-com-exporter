@@ -1,0 +1,24 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  default: standard
+  disable:
+    - cyclop        # cyclomatic complexity — noisy for small funcs
+    - depguard      # dependency guard — no complex allow/deny rules needed
+    - exhaustruct   # require all struct fields set — too strict for descriptor pattern
+    - funlen        # function length — Collect/listAllChecks are intentionally longer
+    - godot         # period at end of comments — too opinionated
+    - mnd           # magic numbers — pageSize const covers the only case
+    - nlreturn      # newline before return — conflicts with gofmt style
+    - testpackage   # separate _test package — not required here
+    - varnamelen    # short variable names — lv/ch/desc are clear in context
+    - wsl           # whitespace linter — too opinionated
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
