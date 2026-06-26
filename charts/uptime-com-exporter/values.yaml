@@ -1,0 +1,135 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/gxben/uptime-com-exporter
+  pullPolicy: IfNotPresent
+  # Overrides the image tag; defaults to the chart's appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# uptime.com API configuration
+uptime:
+  # Provide apiKey directly (stored in a Secret created by this chart).
+  # Prefer existingSecret when managing secrets externally (e.g. External Secrets Operator).
+  apiKey: ""
+
+  # Use a pre-existing Secret instead of creating one.
+  # The Secret must contain the key "api-key".
+  existingSecret: ""
+  existingSecretKey: "api-key"
+
+  # Timeout for each uptime.com API scrape
+  scrapeTimeout: "30s"
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9400"
+  prometheus.io/path: "/metrics"
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  fsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 9400
+  annotations: {}
+
+# Prometheus Operator ServiceMonitor
+serviceMonitor:
+  enabled: false
+  namespace: ""
+  interval: "60s"
+  scrapeTimeout: "50s"
+  labels: {}
+  relabelings: []
+  metricRelabelings: []
+
+# Prometheus Operator PrometheusRule
+prometheusRule:
+  enabled: false
+  namespace: ""
+  labels: {}
+  additionalLabels: {}
+  rules:
+    - alert: UptimeCheckDown
+      expr: uptime_check_up == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "uptime.com check {{ $labels.name }} is DOWN"
+        description: "Check {{ $labels.name }} ({{ $labels.address }}) has been down for more than 5 minutes."
+    - alert: UptimeExporterDown
+      expr: uptime_scrape_success == 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "uptime.com exporter scrape failed"
+        description: "The uptime.com exporter could not reach the API."
+    - alert: UptimeSSLExpiringSoon
+      expr: uptime_check_ssl_days_remaining < 14
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: "SSL certificate for {{ $labels.name }} expires in {{ $value | humanize }} days"
+        description: "Check {{ $labels.name }} ({{ $labels.address }}) SSL certificate will expire soon."
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: uptime-exporter.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Extra environment variables injected into the container
+extraEnv: []
+# - name: FOO
+#   value: bar
+
+# Extra volumes / mounts
+extraVolumes: []
+extraVolumeMounts: []
