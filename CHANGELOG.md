@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/gxben/uptime-com-exporter/compare/v1.1.2...v1.1.3) (2026-06-29)
+
+### Bug Fixes
+
+* ensure chart is publicly available ([c6e78f4](https://github.com/gxben/uptime-com-exporter/commit/c6e78f4d4667e01d4d9b7a264b605a8554aacd81))
+* fix release steps ([164dc4c](https://github.com/gxben/uptime-com-exporter/commit/164dc4c0309e48df96758de1eb3b0d5fae90bcef))
+* fix release steps ([eadae60](https://github.com/gxben/uptime-com-exporter/commit/eadae601b96a78ebcd16df09fe0465bb39f8c240))
+
 ## [1.1.2](https://github.com/gxben/uptime-com-exporter/compare/v1.1.1...v1.1.2) (2026-06-29)
 
 ### Bug Fixes
