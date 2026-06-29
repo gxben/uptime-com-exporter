@@ -17,9 +17,6 @@ maintainers:
     email: bzores@cinemo.com
 annotations:
   artifacthub.io/license: Apache-2.0
-  artifacthub.io/signKey: |
-    fingerprint: ""
-    url: ""
   artifacthub.io/changes: |
     - kind: added
       description: Initial release
