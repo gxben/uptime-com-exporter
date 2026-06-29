@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/gxben/uptime-com-exporter/compare/v1.2.0...v1.2.1) (2026-06-29)
+
+### Bug Fixes
+
+* update Artifact Hub repository ID ([47a9f94](https://github.com/gxben/uptime-com-exporter/commit/47a9f94b8521f181726f85694e7d98962f0bba6f))
+
 ## [1.2.0](https://github.com/gxben/uptime-com-exporter/compare/v1.1.7...v1.2.0) (2026-06-29)
 
 ### Features
