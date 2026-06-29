@@ -40,6 +40,7 @@ type Collector struct {
 	underMaintenance *prometheus.Desc
 	responseTime     *prometheus.Desc
 	sslIsMonitored   *prometheus.Desc
+	tagInfo          *prometheus.Desc
 
 	scrapeDuration *prometheus.Desc
 	scrapeSuccess  *prometheus.Desc
@@ -62,6 +63,11 @@ func New(api upapi.API, timeout time.Duration) *Collector {
 		underMaintenance: desc("under_maintenance", "1 if the check is currently in a maintenance window."),
 		responseTime:     desc("response_time_ms", "Most recent cached response time in milliseconds."),
 		sslIsMonitored:   desc("ssl_monitored", "1 if this check has an SSL certificate monitoring config attached."),
+		tagInfo: prometheus.NewDesc(
+			prometheus.BuildFQName(namespace, "check", "tag_info"),
+			"Info metric with one series per check/tag pair; join on pk for tag-based filtering.",
+			[]string{"pk", "name", "tag"}, nil,
+		),
 
 		scrapeDuration: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "scrape", "duration_seconds"),
@@ -81,6 +87,7 @@ func (c *Collector) Describe(ch chan<- *prometheus.Desc) {
 	ch <- c.underMaintenance
 	ch <- c.responseTime
 	ch <- c.sslIsMonitored
+	ch <- c.tagInfo
 	ch <- c.scrapeDuration
 	ch <- c.scrapeSuccess
 }
@@ -109,8 +116,9 @@ func (c *Collector) collect(ch chan<- prometheus.Metric) error {
 	}
 
 	for _, check := range checks {
+		pkStr := fmt.Sprintf("%d", check.PK)
 		lv := []string{
-			fmt.Sprintf("%d", check.PK),
+			pkStr,
 			check.Name,
 			check.Address,
 			check.CheckType,
@@ -137,6 +145,10 @@ func (c *Collector) collect(ch chan<- prometheus.Metric) error {
 		}
 
 		boolGauge(c.sslIsMonitored, check.SSLConfig != nil)
+
+		for _, tag := range check.Tags {
+			ch <- prometheus.MustNewConstMetric(c.tagInfo, prometheus.GaugeValue, 1, pkStr, check.Name, tag)
+		}
 	}
 
 	return nil
