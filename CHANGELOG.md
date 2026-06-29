@@ -1,3 +1,9 @@
+## [1.1.4](https://github.com/gxben/uptime-com-exporter/compare/v1.1.3...v1.1.4) (2026-06-29)
+
+### Bug Fixes
+
+* fix release steps ([25f2f98](https://github.com/gxben/uptime-com-exporter/commit/25f2f9881e233bfdcd0c0eb0b5622c164ad3a12d))
+
 ## [1.1.3](https://github.com/gxben/uptime-com-exporter/compare/v1.1.2...v1.1.3) (2026-06-29)
 
 ### Bug Fixes
