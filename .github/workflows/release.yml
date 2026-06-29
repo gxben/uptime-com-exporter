@@ -150,20 +150,3 @@ jobs:
             "ghcr.io/${{ github.repository_owner }}/charts:artifacthub.io" \
             --config /dev/null:application/vnd.cncf.artifacthub.config.v1+yaml \
             "artifacthub-repo.yml:application/vnd.cncf.artifacthub.repository-metadata.layer.v1.yaml"
-
-      - name: Make charts namespace package public
-        run: |
-          # The oras push above creates ghcr.io/ORG/charts as a new private package.
-          # Make it public so ArtifactHub can pull the metadata without authentication.
-          http_code=$(curl -sS \
-            -o /tmp/gh-pkg-response.json \
-            -w "%{http_code}" \
-            -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/user/packages/container/charts" \
-            -d '{"visibility":"public"}')
-          echo "HTTP $http_code"
-          cat /tmp/gh-pkg-response.json
-          [ "$http_code" -lt 400 ]
