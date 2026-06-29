@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/gxben/uptime-com-exporter/compare/v1.1.7...v1.2.0) (2026-06-29)
+
+### Features
+
+* add extra labels for probe tags ([e308e91](https://github.com/gxben/uptime-com-exporter/commit/e308e910eaf35e7953f076879e97f9a47d5ef358))
+
 ## [1.1.7](https://github.com/gxben/uptime-com-exporter/compare/v1.1.6...v1.1.7) (2026-06-29)
 
 ### Bug Fixes
