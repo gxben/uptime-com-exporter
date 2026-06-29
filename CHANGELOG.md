@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/gxben/uptime-com-exporter/compare/v1.2.1...v1.2.2) (2026-06-29)
+
+### Bug Fixes
+
+* hopefully fix versionning on Artifact Hub ([f95bf37](https://github.com/gxben/uptime-com-exporter/commit/f95bf37f080ceb25a0832345defde3ec520da402))
+
 ## [1.2.1](https://github.com/gxben/uptime-com-exporter/compare/v1.2.0...v1.2.1) (2026-06-29)
 
 ### Bug Fixes
