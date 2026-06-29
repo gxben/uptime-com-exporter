@@ -1,3 +1,9 @@
+## [1.1.7](https://github.com/gxben/uptime-com-exporter/compare/v1.1.6...v1.1.7) (2026-06-29)
+
+### Bug Fixes
+
+* remove useless singkey from artifact hub ([f9b39f2](https://github.com/gxben/uptime-com-exporter/commit/f9b39f2ab510fb06187e97d2a06aeba4d8a9b968))
+
 ## [1.1.6](https://github.com/gxben/uptime-com-exporter/compare/v1.1.5...v1.1.6) (2026-06-29)
 
 ### Bug Fixes
