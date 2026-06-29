@@ -136,12 +136,18 @@ jobs:
 
       - name: Make chart package public
         run: |
-          curl -sSf -X PATCH \
+          http_code=$(curl -sS \
+            -o /tmp/gh-pkg-response.json \
+            -w "%{http_code}" \
+            -X PATCH \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/user/packages/container/charts%2Fuptime-com-exporter" \
-            -d '{"visibility":"public"}'
+            -d '{"visibility":"public"}')
+          echo "HTTP $http_code"
+          cat /tmp/gh-pkg-response.json
+          [ "$http_code" -lt 400 ]
         env:
           GH_TOKEN: ${{ secrets.ARTIFACT_PACKAGES_TOKEN }}
 
