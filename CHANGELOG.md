@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/gxben/uptime-com-exporter/compare/v1.0.0...v1.1.0) (2026-06-29)
+
+### Features
+
+* add artifactory support ([b634d89](https://github.com/gxben/uptime-com-exporter/commit/b634d8992fa0257b9435d1a80ae8996b651f36c4))
+
 ## 1.0.0 (2026-06-26)
 
 ### Features
