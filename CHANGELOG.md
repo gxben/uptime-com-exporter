@@ -1,3 +1,9 @@
+## [1.1.6](https://github.com/gxben/uptime-com-exporter/compare/v1.1.5...v1.1.6) (2026-06-29)
+
+### Bug Fixes
+
+* fix image version from chart (no 'v' prefix) ([cf96ede](https://github.com/gxben/uptime-com-exporter/commit/cf96ede750df6cdc4bdd8519c087abeef21ef941))
+
 ## [1.1.5](https://github.com/gxben/uptime-com-exporter/compare/v1.1.4...v1.1.5) (2026-06-29)
 
 ### Bug Fixes
