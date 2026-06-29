@@ -143,10 +143,18 @@ jobs:
 
       - name: Push ArtifactHub repository metadata
         run: |
+          VERSION="${{ needs.release.outputs.new_release_version }}"
           # Metadata must live at the namespace root (ghcr.io/ORG/charts:artifacthub.io),
           # not under a sub-path — that is what ArtifactHub fetches when scanning the
           # oci://ghcr.io/ORG/charts repository URL.
+          #
+          # The config blob digest is used by ArtifactHub as a change-detection key.
+          # Using /dev/null always produces sha256:e3b0c44… (SHA256 of empty), so
+          # ArtifactHub treats every push as "unchanged" and skips re-reading the layer.
+          # Stamping the version into the config gives a unique digest per release,
+          # ensuring ArtifactHub re-reads the metadata layer each time.
+          printf 'version: "%s"\n' "${VERSION}" > /tmp/ah-config.yaml
           oras push \
             "ghcr.io/${{ github.repository_owner }}/charts:artifacthub.io" \
-            --config /dev/null:application/vnd.cncf.artifacthub.config.v1+yaml \
+            --config /tmp/ah-config.yaml:application/vnd.cncf.artifacthub.config.v1+yaml \
             "artifacthub-repo.yml:application/vnd.cncf.artifacthub.repository-metadata.layer.v1.yaml"
