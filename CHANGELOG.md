@@ -1,3 +1,9 @@
+## [1.1.5](https://github.com/gxben/uptime-com-exporter/compare/v1.1.4...v1.1.5) (2026-06-29)
+
+### Bug Fixes
+
+* declare package name to Artifact Hub ([083516f](https://github.com/gxben/uptime-com-exporter/commit/083516f895b420fa897ead6bdc56abe0205cc8fa))
+
 ## [1.1.4](https://github.com/gxben/uptime-com-exporter/compare/v1.1.3...v1.1.4) (2026-06-29)
 
 ### Bug Fixes
