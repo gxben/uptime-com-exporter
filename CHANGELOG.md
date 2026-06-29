@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/gxben/uptime-com-exporter/compare/v1.1.0...v1.1.1) (2026-06-29)
+
+### Bug Fixes
+
+* ensure chart is publicly available ([2fe4319](https://github.com/gxben/uptime-com-exporter/commit/2fe4319f16c67a2e5ba793c0ba302bad39ad4ad7))
+* upgrade setup-oras gh workflow to v2, v1 is deprecated ([3f81eac](https://github.com/gxben/uptime-com-exporter/commit/3f81eac9522fcd5d2675bc27d4dba858ed77f382))
+* upgrade to node.js v24 ([14d20d9](https://github.com/gxben/uptime-com-exporter/commit/14d20d9368e308eccebd10dbdd82ede7524110f4))
+
 ## [1.1.0](https://github.com/gxben/uptime-com-exporter/compare/v1.0.0...v1.1.0) (2026-06-29)
 
 ### Features
